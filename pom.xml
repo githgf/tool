@@ -200,15 +200,20 @@
 
 	<profiles>
 		<profile>
-			<id>8035</id>
+			<id>local</id>
 			<properties>
-				<activatedProperties>8035</activatedProperties>
+				<activatedProperties>local</activatedProperties>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 		</profile>
-
+		<profile>
+			<id>aliyun_hgf</id>
+			<properties>
+				<activatedProperties>aliyun_hgf</activatedProperties>
+			</properties>
+		</profile>
 	</profiles>
 
 </project>
