@@ -21,7 +21,6 @@ import java.util.Date;
 /**
  * UserActionLog日志切面
  * @author  hans
- * Created by  hans on 2018/4/27.
  */
 @Component
 @Aspect

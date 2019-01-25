@@ -59,22 +59,6 @@ public class SpringMongoConfig {
         return morphiaFactoryBean;
     }
 
-    /*@Bean("express")
-    public DatastoreFactoryBean expressBean(@Autowired MongoFactoryBean mongoFactoryBean,
-                                          @Autowired MorphiaFactoryBean morphiaFactoryBean) {
-        DatastoreFactoryBean factoryBean = new DatastoreFactoryBean();
-        try {
-            factoryBean.setMorphia(morphiaFactoryBean.getObject());
-            factoryBean.setMongo(mongoFactoryBean.getObject());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        factoryBean.setDbName(dbName);
-        factoryBean.setToEnsureCaps(false);
-
-        return factoryBean;
-    }*/
-
     @Bean("tool")
     public DatastoreFactoryBean toolBean(@Autowired MongoFactoryBean mongoFactoryBean,
                                              @Autowired MorphiaFactoryBean morphiaFactoryBean) {

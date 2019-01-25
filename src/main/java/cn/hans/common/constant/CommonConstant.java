@@ -1,6 +1,5 @@
 package cn.hans.common.constant;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +7,6 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.math.BigDecimal;
 
 /**
  * 全局常量
@@ -53,14 +51,6 @@ public class CommonConstant {
 
         return applicationHome;
     }
-
-
-    /**新订单统计报表sheet名*/
-    public static final String TOTALRECVD_SHEET = "TotalReceived";
-    public static final String DELIVERED_SHEET = "Delivered";
-    public static final String RTC_SHEET = "RTC";
-    public static final String SUMMARY_SHEET = "Summary";
-
 
 
 
