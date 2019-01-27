@@ -43,9 +43,7 @@ public class LogAspect {
     @AfterReturning(value = "requestMappingPointCut()", returning = "retVal")
     public void doLogController(JoinPoint joinpoint, Object retVal) {
         String className = joinpoint.getTarget().getClass().getName();
-        if (!className.startsWith("com")) {
-            return;
-        }
+
         String methodName = joinpoint.getSignature().getName();
         if(methodName.toLowerCase().equals("gocurrentflownode")){
             return ;

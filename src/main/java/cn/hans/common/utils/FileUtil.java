@@ -4,7 +4,9 @@ package cn.hans.common.utils;
 import org.apache.commons.io.FileExistsException;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -65,10 +67,12 @@ public class FileUtil {
 			outBuff.flush();
 		} finally {
 			// 关闭流
-			if (inBuff != null)
+			if (inBuff != null) {
 				inBuff.close();
-			if (outBuff != null)
+			}
+			if (outBuff != null) {
 				outBuff.close();
+			}
 		}
 	}
 
@@ -132,10 +136,12 @@ public class FileUtil {
 	 */
 	public static String zipFiles(String finalZipFilePath,String zipName,String... needZipFileList) throws FileExistsException {
 
-		if (needZipFileList == null || needZipFileList.length == 0)return null;
+		if (needZipFileList == null || needZipFileList.length == 0) {
+			return null;
+		}
 
 		if (StringUtils.isBlank(zipName)){
-			zipName = String.valueOf(new Date().getTime()) + ".zip";
+			zipName = System.currentTimeMillis() + ".zip";
 		}
 		if (StringUtils.isBlank(finalZipFilePath)){
 
@@ -179,11 +185,9 @@ public class FileUtil {
 				}
 
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 
 			try {
 				if (bufferedInputStream != null){
@@ -227,38 +231,20 @@ public class FileUtil {
 
 	}
 
-//	public static boolean doReport(String jrxmlPath,Map parameter,List<Map> lstdatamap,String pdfPath ){
-//		JasperReport jasperReport;
-//		JasperPrint jasperPrint;
-//		try {
-//			jasperReport = JasperCompileManager.compileReport(jrxmlPath);
-//
-//			JREmptyDataSource d = new JREmptyDataSource();
-//
-//			jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, createReportDataSource(lstdatamap));
-//
-//			JasperExportManager.exportReportToPdfFile(jasperPrint, pdfPath);
-//			return true;
-//		} catch (JRException e) {
-//			e.printStackTrace();
-//		}
-//		return false;
-//	}
-//	private static JRDataSource createReportDataSource(List<Map> lstdatamap) {
-//		
-//		if(lstdatamap == null || lstdatamap.size() == 0){
-//			return new JREmptyDataSource();
-//		}else{
-//			Map[] reportRows = initializeMapArray(lstdatamap);
-//			return new JRMapArrayDataSource(reportRows);
-//		}
-//	}
-//	
-//	private static Map[] initializeMapArray(List<Map> lstdatamap) {
-//		// 你可以把数组里面的每个map看成一个对象，就相于数据库里面的每个字段		
-//		HashMap[] reportRows = (HashMap[]) lstdatamap.toArray();
-//		
-//		return reportRows;
-//	}
-	
+
+	public static void wrapperFileDownloadResponse(HttpServletResponse httpServletResponse, String fileName){
+		if (httpServletResponse == null){return;}
+		try {
+			// 配置文件下载
+			httpServletResponse.setHeader("content-type", "application/octet-stream");
+			httpServletResponse.setContentType("application/octet-stream");
+			// 下载文件能正常显示中文
+			httpServletResponse.setHeader("Content-Disposition", "attachment;" + (StringUtils.isNotBlank(fileName) ? "filename=" + URLEncoder.encode(fileName, "UTF-8") : ""));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
 }
